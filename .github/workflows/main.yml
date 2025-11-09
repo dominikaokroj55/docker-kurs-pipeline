@@ -23,3 +23,10 @@ jobs:
         with:
           push: true
           tags: dolcia/pipeline-app:latest
+          # --- DODANY KROK WDROŻENIA ---
+      - name: Deploy to Render
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}" \
+          -H "Accept: application/json" \
+          https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys
